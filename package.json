@@ -1,0 +1,27 @@
+{
+  "name": "520-prank-review",
+  "version": "1.0.0",
+  "private": true,
+  "description": "520 情感账户网络人格整蛊审查系统",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "520",
+    "prank",
+    "valentine",
+    "interactive",
+    "canvas",
+    "web-app"
+  ],
+  "author": "crazyzhang277",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "vite": "^5.2.0"
+  }
+}

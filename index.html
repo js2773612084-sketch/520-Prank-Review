@@ -1,383 +1,625 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>520 情感账户全面资产审查</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
-      background-color: #fff1f2;
-      color: #881337;
-      -webkit-tap-highlight-color: transparent; /* 消除手机点击高亮蓝色框 */
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-    /* 粉色流动渐变背景 */
-    .main-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(270deg, #ffe4e6, #fff1f2, #ffe4e6, #fff1f2, #ffe4e6);
-      background-size: 800% 800%;
-      animation: movingGradient 20s ease infinite;
-    }
+    <!-- SEO & Social Sharing Meta Tags -->
+    <title>🌸 520 情感账户全面资产审查</title>
+    <meta
+      name="description"
+      content="专为 520 节日打造的网络人格整蛊审查系统，五轨降维打击，满屏粉色爱心雨与幽默反转。"
+    />
+    <meta name="keywords" content="520,整蛊,情感审查,爱心雨,互动网页,前端搞笑" />
+    <meta name="author" content="crazyzhang277" />
 
-    @keyframes movingGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    <!-- Open Graph / Facebook / WeChat -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="🌸 520 情感账户全面资产审查" />
+    <meta
+      property="og:description"
+      content="检测到您的IP地址在“深情领地”异常登录，请完成网络人格五轨审查！"
+    />
+    <meta property="og:image" content="sun.jpg" />
 
-    /* 动态 Canvas 爱心雨 */
-    #heartCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="🌸 520 情感账户全面资产审查" />
+    <meta name="twitter:description" content="专为 520 节日打造的网络人格整蛊审查系统。" />
+    <meta name="twitter:image" content="sun.jpg" />
 
-    /* 手机端自适应磨砂玻璃卡片 */
-    .glass-card {
-      position: relative;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 2px solid #f43f5e;
-      border-radius: 20px;
-      padding: 2rem 1.5rem; /* 针对手机缩小内边距，防止内容塞不下 */
-      box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15);
-      text-align: center;
-      max-width: 90%;
-      width: 22rem;
-      box-sizing: border-box;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: vividPulse 6s infinite alternate;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
 
-    @keyframes vividPulse {
-      0% { transform: scale(1); box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15); }
-      100% { transform: scale(1.02); box-shadow: 0 15px 35px rgba(244, 63, 94, 0.25); }
-    }
+    <style>
+      :root {
+        --color-primary: #f43f5e;
+        --color-primary-dark: #e11d48;
+        --color-secondary: #fff1f2;
+        --color-accent: #db2777;
+        --color-text-main: #881337;
+        --color-text-dark: #4c0519;
+        --color-border: #fda4af;
+        --color-border-light: #fbcfe8;
+        --font-stack:
+          -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      }
 
-    /* 终极卡片手机布局优化 */
-    .glass-card.final-layout {
-      width: 92%;
-      max-width: 24rem;
-      display: flex;
-      flex-direction: column; /* 手机端强制改为上下布局 */
-      align-items: center;
-      gap: 1.2rem;
-      padding: 1.5rem;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .final-left {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-    }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: var(--font-stack);
+        background-color: var(--color-secondary);
+        color: var(--color-text-main);
+        -webkit-tap-highlight-color: transparent;
+      }
 
-    .final-right {
-      width: 150px; /* 手机端缩小照片尺寸 */
-      flex-shrink: 0;
-    }
+      /* 粉色流动渐变背景 */
+      .main-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(270deg, #ffe4e6, #fff1f2, #ffe4e6, #fff1f2, #ffe4e6);
+        background-size: 800% 800%;
+        animation: movingGradient 20s ease infinite;
+      }
 
-    .final-photo {
-      width: 100%;
-      border-radius: 12px;
-      border: 3px solid #f43f5e;
-      box-shadow: 0 6px 15px rgba(244, 63, 94, 0.3);
-      animation: photoBounce 3s ease-in-out infinite;
-    }
+      @keyframes movingGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
 
-    @keyframes photoBounce {
-      0%, 100% { transform: translateY(0) rotate(2deg); }
-      50% { transform: translateY(-6px) rotate(-2deg); }
-    }
+      /* 动态 Canvas 爱心雨 */
+      #heartCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
 
-    h1 {
-      font-size: 1.6rem; /* 针对移动端优化字体大小 */
-      color: #e11d48;
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
+      /* 音效控制按钮 */
+      .sound-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(244, 63, 94, 0.15);
+        transition:
+          transform 0.2s ease,
+          background-color 0.2s ease;
+      }
 
-    .subtitle {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #4c0519;
-      margin-bottom: 1.8rem;
-      opacity: 0.9;
-    }
+      .sound-toggle:hover {
+        transform: scale(1.1);
+      }
 
-    /* 移动端专属按钮组：改为垂直排列更易单手点击 */
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      margin-top: 15px;
-    }
+      /* 手机端自适应磨砂玻璃卡片 */
+      .glass-card {
+        position: relative;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 2px solid var(--color-primary);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        box-shadow: 0 12px 30px rgba(244, 63, 94, 0.18);
+        text-align: center;
+        max-width: 90%;
+        width: 22rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: vividPulse 6s infinite alternate;
+      }
 
-    button {
-      outline: none;
-      font-family: inherit;
-      border: none;
-      border-radius: 999px;
-      font-size: 1.05rem;
-      padding: 0.85rem 0;
-      width: 100%; /* 按钮撑满整行 */
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-      position: relative;
-    }
+      @keyframes vividPulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 12px 30px rgba(244, 63, 94, 0.18);
+        }
+        100% {
+          transform: scale(1.02);
+          box-shadow: 0 15px 35px rgba(244, 63, 94, 0.28);
+        }
+      }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #ec4899, #f43f5e);
-      color: white;
-      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
-    }
+      /* 终极卡片手机布局优化 */
+      .glass-card.final-layout {
+        width: 92%;
+        max-width: 24rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.5rem;
+      }
 
-    .btn-secondary {
-      background: #fff1f2;
-      color: #e11d48;
-      border: 1px solid #fda4af;
-    }
+      .final-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
 
-    /* 输入框适配 */
-    .fake-input {
-      width: 100%;
-      padding: 0.8rem;
-      border: 2px solid #fbcfe8;
-      border-radius: 12px;
-      font-size: 1rem;
-      color: #e11d48;
-      background: white;
-      box-sizing: border-box;
-      outline: none;
-      text-align: center;
-    }
+      .final-right {
+        width: 150px;
+        flex-shrink: 0;
+      }
 
-    /* 扫描器适配 */
-    .radar-container {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 15px;
-    }
-    .radar-box {
-      position: absolute;
-      inset: 0;
-      border: 3px solid #fda4af;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #fff1f2;
-      z-index: 2;
-    }
-    .radar-face-preview {
-      position: absolute;
-      inset: 3px;
-      border-radius: 50%;
-      width: calc(100% - 6px);
-      height: calc(100% - 6px);
-      object-fit: cover;
-      filter: blur(12px);
-      transition: filter 4s linear;
-      z-index: 1;
-    }
-    .radar-line {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(244,63,94,0), rgba(244,63,94,0.5));
-      animation: scan 1.5s linear infinite;
-      z-index: 3;
-    }
-    @keyframes scan {
-      0% { transform: translateY(-130px); }
-      100% { transform: translateY(130px); }
-    }
+      .final-photo {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        border: 3px solid var(--color-primary);
+        box-shadow: 0 6px 15px rgba(244, 63, 94, 0.3);
+        animation: photoBounce 3s ease-in-out infinite;
+        object-fit: cover;
+      }
 
-    /* 协议勾选 */
-    .permission-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 0.8rem;
-      background: white;
-      margin-bottom: 8px;
-      border-radius: 10px;
-      border: 1px solid #ffe4e6;
-      font-size: 0.85rem;
-    }
+      @keyframes photoBounce {
+        0%,
+        100% {
+          transform: translateY(0) rotate(2deg);
+        }
+        50% {
+          transform: translateY(-6px) rotate(-2deg);
+        }
+      }
 
-    /* 警告弹窗手机大小优化 */
-    .alert-popup {
-      position: absolute;
-      width: 240px;
-      background: #fff1f2;
-      border: 2px solid #ef4444;
-      border-radius: 14px;
-      padding: 1rem;
-      box-shadow: 0 15px 20px rgba(159, 18, 57, 0.2);
-      color: #991b1b;
-      z-index: 99999;
-      animation: vividPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    @keyframes vividPopup {
-      0% { transform: scale(0.3); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+      h1 {
+        font-size: 1.6rem;
+        color: var(--color-primary-dark);
+        margin-top: 0;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
 
-    .progress-bound {
-      width: 100%;
-      height: 12px;
-      background: #ffe4e6;
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid #fbcfe8;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #f43f5e, #db2777);
-      transition: width 0.1s linear;
-    }
+      .subtitle {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--color-text-dark);
+        margin-bottom: 1.8rem;
+        opacity: 0.95;
+      }
 
-    @keyframes shake {
-      0%, 100% { transform: translate(0, 0); }
-      10%, 30%, 50%, 70%, 90% { transform: translate(-6px, 0); }
-      20%, 40%, 60%, 80% { transform: translate(6px, 0); }
-    }
-    .shake-effect { animation: shake 0.4s ease-in-out; }
-  </style>
-</head>
-<body>
+      /* 按钮组 */
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        margin-top: 15px;
+      }
 
-  <div class="main-container" id="stageContainer">
-    <canvas id="heartCanvas"></canvas>
+      button {
+        outline: none;
+        font-family: inherit;
+        border: none;
+        border-radius: 999px;
+        font-size: 1.05rem;
+        padding: 0.85rem 0;
+        width: 100%;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s ease;
+        position: relative;
+      }
 
-    <div class="glass-card" id="mainCard">
-      <h1>🌸 520 情感账户资产审查</h1>
-      <p class="subtitle">
-        检测到您的IP地址在“深情领地”异常登录。<br>
-        为了您的安全，请完成以下网络人格五轨审查。<br>
-        <span style="color:#e11d48; font-size:0.85rem; font-weight:bold;">* 拒绝验证将导致脱单功能永久锁定 *</span>
-      </p>
+      button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
 
-      <div class="btn-group">
-        <button id="btnYes" class="btn-primary">接受审查 ✨</button>
-        <button id="btnNo" class="btn-secondary">老子不验 🙅</button>
-      </div>
+      .btn-primary {
+        background: linear-gradient(135deg, #ec4899, #f43f5e);
+        color: white;
+        box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+      }
+
+      .btn-primary:active {
+        transform: scale(0.98);
+      }
+
+      .btn-secondary {
+        background: var(--color-secondary);
+        color: var(--color-primary-dark);
+        border: 1px solid var(--color-border);
+      }
+
+      /* 输入框适配 */
+      .fake-input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid var(--color-border-light);
+        border-radius: 12px;
+        font-size: 1rem;
+        color: var(--color-primary-dark);
+        background: white;
+        outline: none;
+        text-align: center;
+      }
+
+      .fake-input:focus {
+        border-color: var(--color-primary);
+      }
+
+      /* 雷达扫描器适配 */
+      .radar-container {
+        position: relative;
+        width: 130px;
+        height: 130px;
+        margin: 0 auto 15px;
+      }
+      .radar-box {
+        position: absolute;
+        inset: 0;
+        border: 3px solid var(--color-border);
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--color-secondary);
+        z-index: 2;
+      }
+      .radar-face-preview {
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+        object-fit: cover;
+        filter: blur(12px);
+        transition: filter 4s linear;
+        z-index: 1;
+      }
+      .radar-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(244, 63, 94, 0), rgba(244, 63, 94, 0.5));
+        animation: scan 1.5s linear infinite;
+        z-index: 3;
+      }
+      @keyframes scan {
+        0% {
+          transform: translateY(-130px);
+        }
+        100% {
+          transform: translateY(130px);
+        }
+      }
+
+      /* 协议勾选 */
+      .permission-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 0.8rem;
+        background: white;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        border: 1px solid #ffe4e6;
+        font-size: 0.85rem;
+      }
+
+      /* 警告弹窗手机大小优化 */
+      .alert-popup {
+        position: absolute;
+        width: 240px;
+        background: var(--color-secondary);
+        border: 2px solid #ef4444;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 15px 20px rgba(159, 18, 57, 0.2);
+        color: #991b1b;
+        z-index: 99999;
+        animation: vividPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      @keyframes vividPopup {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .progress-bound {
+        width: 100%;
+        height: 12px;
+        background: #ffe4e6;
+        border-radius: 999px;
+        overflow: hidden;
+        border: 1px solid var(--color-border-light);
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #f43f5e, #db2777);
+        transition: width 0.1s linear;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translate(-6px, 0);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translate(6px, 0);
+        }
+      }
+      .shake-effect {
+        animation: shake 0.4s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container" id="stageContainer">
+      <!-- 背景 Canvas 粒子爱心雨 -->
+      <canvas id="heartCanvas"></canvas>
+
+      <!-- 音效开/关切换按钮 -->
+      <button class="sound-toggle" id="soundToggle" aria-label="音效开关" title="音效开关">
+        🔊
+      </button>
+
+      <!-- 主展示卡片容器 -->
+      <main class="glass-card" id="mainCard" role="region" aria-live="polite">
+        <h1>🌸 520 情感账户资产审查</h1>
+        <p class="subtitle">
+          检测到您的IP地址在“深情领地”异常登录。<br />
+          为了您的安全，请完成以下网络人格五轨审查。<br />
+          <span style="color: #e11d48; font-size: 0.85rem; font-weight: bold"
+            >* 拒绝验证将导致脱单功能永久锁定 *</span
+          >
+        </p>
+
+        <div class="btn-group">
+          <button id="btnYes" class="btn-primary">接受审查 ✨</button>
+          <button id="btnNo" class="btn-secondary">老子不验 🙅</button>
+        </div>
+      </main>
     </div>
-  </div>
 
-  <script>
-    const mainCard = document.getElementById('mainCard');
-    const canvas = document.getElementById('heartCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // 照片文件名定义
-    const MY_PHOTO = "sun.jpg";
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Canvas 爱心雨
-    const hearts = [];
-    class Heart {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = -Math.random() * canvas.height;
-        this.size = Math.random() * 15 + 10; // 手机端稍微缩小爱心
-        this.speed = Math.random() * 1.5 + 1.2;
-        this.drift = Math.sin(Math.random() * 2) * 0.3;
-        this.color = Math.random() < 0.6 ? '#f43f5e' : '#fda4af';
-        this.opacity = Math.random() * 0.4 + 0.4;
-      }
-      update() {
-        this.y += this.speed;
-        this.x += this.drift;
-        if (this.y > canvas.height) {
-          this.y = -this.size;
-          this.x = Math.random() * canvas.width;
+    <script>
+      // ==================== 原生 Web Audio API 音效引擎 ====================
+      class SynthesizerAudio {
+        constructor() {
+          this.ctx = null;
+          this.muted = false;
+        }
+        init() {
+          if (!this.ctx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+              this.ctx = new AudioContext();
+            }
+          }
+          if (this.ctx && this.ctx.state === "suspended") {
+            this.ctx.resume();
+          }
+        }
+        playPop() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.08);
+          } catch (e) {}
+        }
+        playError() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+            osc.frequency.setValueAtTime(140, this.ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.2);
+          } catch (e) {}
+        }
+        playFanfare() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const notes = [523.25, 659.25, 783.99, 1046.5];
+            notes.forEach((freq, i) => {
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.type = "triangle";
+              osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.12);
+              gain.gain.setValueAtTime(0.3, this.ctx.currentTime + i * 0.12);
+              gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.12 + 0.25);
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.start(this.ctx.currentTime + i * 0.12);
+              osc.stop(this.ctx.currentTime + i * 0.12 + 0.25);
+            });
+          } catch (e) {}
         }
       }
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = this.color;
-        ctx.font = `${this.size}px serif`;
-        ctx.fillText('❤️', this.x, this.y);
-        ctx.restore();
-      }
-    }
 
-    for (let i = 0; i < 35; i++) { hearts.push(new Heart()); } // 降低手机端粒子数量，保障丝滑不卡顿
-
-    function animateHearts() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hearts.forEach(h => { h.update(); h.draw(); });
-      requestAnimationFrame(animateHearts);
-    }
-    animateHearts();
-
-    // ==================== 关卡 1：手机端完美错开点击（瞬移恶搞） ====================
-    let rejectCount = 0;
-    const initPrank = () => {
-      const btnNo = document.getElementById('btnNo');
-      if(!btnNo) return;
-      
-      const escapeAndPrank = (e) => {
-        e.preventDefault(); // 阻止手机端默认点击行为触发
-        rejectCount++;
-        if (rejectCount <= 3) {
-          // 确保瞬移位置在手机屏幕安全可视区域内（扣除按钮自身宽高）
-          const maxX = window.innerWidth - 130;
-          const maxY = window.innerHeight - 50;
-          btnNo.style.position = 'fixed';
-          btnNo.style.width = '120px'; // 瞬移时缩小体积，更好玩
-          btnNo.style.left = `${Math.max(15, Math.random() * maxX)}px`;
-          btnNo.style.top = `${Math.max(15, Math.random() * maxY)}px`;
-          btnNo.innerText = `😜 (${rejectCount}/3)`;
-        } else {
-          triggerWarningPopups();
-        }
+      const sound = new SynthesizerAudio();
+      const soundToggle = document.getElementById("soundToggle");
+      soundToggle.onclick = () => {
+        sound.muted = !sound.muted;
+        soundToggle.innerText = sound.muted ? "🔇" : "🔊";
       };
-      
-      // 适配手机端的触摸和点击事件
-      btnNo.addEventListener('touchstart', escapeAndPrank);
-      btnNo.addEventListener('click', escapeAndPrank);
-    };
 
-    function triggerWarningPopups() {
-      mainCard.classList.add('shake-effect');
-      setTimeout(() => mainCard.classList.remove('shake-effect'), 500);
+      // ==================== DOM & Canvas 元素初始化 ====================
+      const mainCard = document.getElementById("mainCard");
+      const canvas = document.getElementById("heartCanvas");
+      const ctx = canvas.getContext("2d");
+      const MY_PHOTO = "sun.jpg";
 
-      for (let i = 0; i < 8; i++) {
-        setTimeout(() => {
-          const popup = document.createElement('div');
-          popup.className = 'alert-popup';
-          popup.innerHTML = `
+      // SVG 照片回退备用
+      const SVG_AVATAR_FALLBACK = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23ffe4e6"/><circle cx="100" cy="80" r="40" fill="%23f43f5e"/><path d="M40 170 Q100 110 160 170" stroke="%23f43f5e" stroke-width="20" fill="none" stroke-linecap="round"/><text x="100" y="190" font-size="16" fill="%23e11d48" text-anchor="middle" font-family="sans-serif">嫌疑人照片</text></svg>`;
+
+      // Canvas 适配高清 Screen (DPI 适配)
+      function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        ctx.scale(dpr, dpr);
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // Canvas 爱心雨粒子系统
+      const hearts = [];
+      class Heart {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * window.innerWidth;
+          this.y = -Math.random() * window.innerHeight;
+          this.size = Math.random() * 14 + 10;
+          this.speed = Math.random() * 1.5 + 1.2;
+          this.drift = Math.sin(Math.random() * Math.PI * 2) * 0.4;
+          this.color = Math.random() < 0.6 ? "#f43f5e" : "#fda4af";
+          this.opacity = Math.random() * 0.4 + 0.4;
+        }
+        update() {
+          this.y += this.speed;
+          this.x += this.drift;
+          if (this.y > window.innerHeight) {
+            this.reset();
+            this.y = -this.size;
+          }
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.fillStyle = this.color;
+          ctx.font = `${this.size}px serif`;
+          ctx.fillText("❤️", this.x, this.y);
+          ctx.restore();
+        }
+      }
+
+      const heartCount = window.innerWidth < 600 ? 25 : 40;
+      for (let i = 0; i < heartCount; i++) {
+        hearts.push(new Heart());
+      }
+
+      function animateHearts() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        hearts.forEach((h) => {
+          h.update();
+          h.draw();
+        });
+        requestAnimationFrame(animateHearts);
+      }
+      animateHearts();
+
+      // ==================== 关卡 1：手机端错开点击（恶搞闪现） ====================
+      let rejectCount = 0;
+      const initPrank = () => {
+        const btnNo = document.getElementById("btnNo");
+        if (!btnNo) return;
+
+        const escapeAndPrank = (e) => {
+          e.preventDefault();
+          sound.playPop();
+          rejectCount++;
+          if (rejectCount <= 3) {
+            const maxX = window.innerWidth - 130;
+            const maxY = window.innerHeight - 50;
+            btnNo.style.position = "fixed";
+            btnNo.style.width = "120px";
+            btnNo.style.left = `${Math.max(15, Math.random() * maxX)}px`;
+            btnNo.style.top = `${Math.max(15, Math.random() * maxY)}px`;
+            btnNo.innerText = `😜 (${rejectCount}/3)`;
+          } else {
+            triggerWarningPopups();
+          }
+        };
+
+        btnNo.addEventListener("touchstart", escapeAndPrank, { passive: false });
+        btnNo.addEventListener("click", escapeAndPrank);
+      };
+
+      function triggerWarningPopups() {
+        sound.playError();
+        mainCard.classList.add("shake-effect");
+        setTimeout(() => mainCard.classList.remove("shake-effect"), 500);
+
+        for (let i = 0; i < 8; i++) {
+          setTimeout(() => {
+            sound.playError();
+            const popup = document.createElement("div");
+            popup.className = "alert-popup";
+            popup.setAttribute("role", "alert");
+            popup.innerHTML = `
             <h3 style="margin:0;color:#ef4444;font-size:1rem;">🚨 嘴硬警告 (Error_520)</h3>
             <p style="font-size:0.8rem;color:#991b1b;line-height:1.4;margin:8px 0;">
               拒绝验证将剥夺2026年度脱单资格！
@@ -386,117 +628,139 @@
               我错了，马上验证 😭
             </button>
           `;
-          popup.style.left = `${Math.random() * (window.innerWidth - 240)}px`;
-          popup.style.top = `${Math.max(40, Math.random() * (window.innerHeight - 130))}px`;
-          document.body.appendChild(popup);
-        }, i * 120);
-      }
-      const btnNo = document.getElementById('btnNo');
-      if(btnNo) {
-        btnNo.style.position = 'static';
-        btnNo.style.width = '100%';
-        btnNo.innerText = "我认输，我验证";
-        btnNo.onclick = startStage2;
-      }
-    }
+            popup.style.left = `${Math.random() * (window.innerWidth - 240)}px`;
+            popup.style.top = `${Math.max(40, Math.random() * (window.innerHeight - 130))}px`;
+            document.body.appendChild(popup);
+          }, i * 120);
+        }
 
-    document.getElementById('btnYes').onclick = startStage2;
-    initPrank();
+        const btnNo = document.getElementById("btnNo");
+        if (btnNo) {
+          btnNo.style.position = "static";
+          btnNo.style.width = "100%";
+          btnNo.innerText = "我认输，马上验证";
+          btnNo.onclick = () => {
+            sound.playPop();
+            startStage2();
+          };
+        }
+      }
 
-    // ==================== 关卡 2：真心话输入劫持 ====================
-    function startStage2() {
-      document.querySelectorAll('.alert-popup').forEach(p => p.remove());
-      
-      mainCard.innerHTML = `
+      document.getElementById("btnYes").onclick = () => {
+        sound.playPop();
+        startStage2();
+      };
+      initPrank();
+
+      // ==================== 关卡 2：真心话输入劫持 ====================
+      function startStage2() {
+        document.querySelectorAll(".alert-popup").forEach((p) => p.remove());
+
+        mainCard.innerHTML = `
         <h1>📝 第一轨：反傲娇内心剖析</h1>
         <p class="subtitle" style="margin-bottom:1.2rem;">请在下方输入框内，输入你的【520年度脱单宣言】：</p>
-        <input type="text" id="typewriterInput" class="fake-input" placeholder="请在这里随意打字输入..." autocomplete="off">
+        <input type="text" id="typewriterInput" class="fake-input" aria-label="脱单宣言输入框" placeholder="请在这里随意打字输入..." autocomplete="off">
         <div class="btn-group">
           <button id="btnStage2" class="btn-primary" style="opacity:0.5;" disabled>请先在上方打字</button>
         </div>
       `;
 
-      const targetText = "本人自愿承认其实我是一个表面嘴硬、内心极度渴望恋爱的绝世大冤种，并申请向站长发放520巨额赞助。";
-      const inputEl = document.getElementById('typewriterInput');
-      const btnEl = document.getElementById('btnStage2');
-      let currentLength = 0;
+        const targetText =
+          "本人自愿承认其实我是一个表面嘴硬、内心极度渴望恋爱的绝世大冤种，并申请向站长发放520巨额赞助。";
+        const inputEl = document.getElementById("typewriterInput");
+        const btnEl = document.getElementById("btnStage2");
+        let currentLength = 0;
 
-      // 劫持输入框
-      inputEl.addEventListener('input', (e) => {
-        currentLength++;
-        if (currentLength > targetText.length) currentLength = targetText.length;
-        inputEl.value = targetText.substring(0, currentLength);
+        inputEl.addEventListener("input", () => {
+          sound.playPop();
+          currentLength++;
+          if (currentLength > targetText.length) currentLength = targetText.length;
+          inputEl.value = targetText.substring(0, currentLength);
 
-        if (currentLength >= targetText.length) {
-          btnEl.removeAttribute('disabled');
-          btnEl.style.opacity = '1';
-          btnEl.innerText = "承认事实，下一步 🤝";
-        }
-      });
+          if (currentLength >= targetText.length) {
+            btnEl.removeAttribute("disabled");
+            btnEl.style.opacity = "1";
+            btnEl.innerText = "承认事实，下一步 🤝";
+          }
+        });
 
-      btnEl.onclick = startStage3;
-    }
+        btnEl.onclick = () => {
+          sound.playPop();
+          startStage3();
+        };
+      }
 
-    // ==================== 关卡 3：AI 偏好人脸透视 ====================
-    function startStage3() {
-      mainCard.innerHTML = `
+      // ==================== 关卡 3：AI 偏好人脸透视 ====================
+      function startStage3() {
+        mainCard.innerHTML = `
         <h1>📷 第二轨：脸部多巴胺扫描</h1>
         <p class="subtitle" style="margin-bottom:1.2rem;">系统正尝试调用前置摄像头，分析您的面部异性吸引力...</p>
         <div class="radar-container">
           <div class="radar-box">
             <div class="radar-line"></div>
-            <img src="${MY_PHOTO}" class="radar-face-preview" id="radarImg">
+            <img src="${MY_PHOTO}" onerror="this.src='${SVG_AVATAR_FALLBACK}'" class="radar-face-preview" id="radarImg" alt="面部扫描图">
           </div>
         </div>
         <p id="scanStatus" style="font-weight:bold; color:#db2777; font-size:0.9rem;">正在捕捉面部轮廓，请保持微笑...</p>
       `;
 
-      const statusText = document.getElementById('scanStatus');
-      const radarImg = document.getElementById('radarImg');
-      
-      setTimeout(() => { if(radarImg) radarImg.style.filter = "blur(5px)"; }, 1500);
+        const statusText = document.getElementById("scanStatus");
+        const radarImg = document.getElementById("radarImg");
 
-      const phases = [
-        "正在扫描胶原蛋白流失速度...",
-        "正在分析单身狗特有的眼神...",
-        "正在测算嘴硬判定弧度...",
-        "扫描完成！"
-      ];
-
-      phases.forEach((text, index) => {
         setTimeout(() => {
-          if(statusText) statusText.innerText = text;
-          if(index === phases.length - 1) { showScanResult(); }
-        }, (index + 1) * 1100);
-      });
-    }
+          if (radarImg) radarImg.style.filter = "blur(5px)";
+        }, 1500);
 
-    function showScanResult() {
-      mainCard.innerHTML = `
+        const phases = [
+          "正在扫描胶原蛋白流失速度...",
+          "正在分析单身狗特有的眼神...",
+          "正在测算嘴硬判定弧度...",
+          "扫描完成！",
+        ];
+
+        phases.forEach((text, index) => {
+          setTimeout(
+            () => {
+              sound.playPop();
+              if (statusText) statusText.innerText = text;
+              if (index === phases.length - 1) {
+                showScanResult();
+              }
+            },
+            (index + 1) * 1100
+          );
+        });
+      }
+
+      function showScanResult() {
+        mainCard.innerHTML = `
         <h1>📊 扫描分析结果报告</h1>
-        <div style="text-align:left; background:white; padding:1rem; border-radius:12px; margin-bottom:1.2rem; border:1px solid #fbcfe8; line-height:1.6; font-size:0.9rem;">
+        <div style="text-align:left; background:white; padding:1rem; border-radius:12px; margin-bottom:1.2rem; border:1px solid var(--color-border-light); line-height:1.6; font-size:0.9rem;">
           🌸 <b>面部多巴胺浓度：</b> 0.001% (缺乏恋爱滋润)<br>
           🌸 <b>傲娇/嘴硬判定：</b> 九段 (无药可救级别)<br>
           🌸 <b>今日颜值评级：</b> 绝美/超帅 (但目前单身)
         </div>
         <button id="btnStage3" class="btn-primary">我不服，继续复核 💢</button>
       `;
-      document.getElementById('btnStage3').onclick = startStage4;
-    }
+        document.getElementById("btnStage3").onclick = () => {
+          sound.playPop();
+          startStage4();
+        };
+      }
 
-    // ==================== 关卡 4：手机流氓全选隐私协议 ====================
-    function startStage4() {
-      mainCard.innerHTML = `
+      // ==================== 关卡 4：流氓全选隐私协议 ====================
+      function startStage4() {
+        mainCard.innerHTML = `
         <h1>🛡️ 第三轨：隐私安全授权</h1>
         <p class="subtitle" style="margin-bottom:1.2rem;">为开启终极脱单通道，请授权以下安全权限：</p>
         
         <div class="permission-item">
           <span>自动清空下季度所有购物车 🛒</span>
-          <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+          <label><input type="checkbox" checked disabled aria-label="购物车权限"></label>
         </div>
         <div class="permission-item">
           <span>公开您的朋友圈偷看记录 👁️</span>
-          <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+          <label><input type="checkbox" checked disabled aria-label="偷看记录权限"></label>
         </div>
         <div class="permission-item" id="trapItem">
           <span id="trapText">520无条件向站长发节日红包 🧧</span>
@@ -506,73 +770,87 @@
         <button id="btnStage4" class="btn-primary" style="margin-top:10px;">同意并提交审查 🚀</button>
       `;
 
-      const btnToggle = document.getElementById('btnToggleTrap');
-      let toggleCount = 0;
+        const btnToggle = document.getElementById("btnToggleTrap");
+        let toggleCount = 0;
 
-      btnToggle.onclick = () => {
-        toggleCount++;
-        if(toggleCount === 1) { btnToggle.innerText = "失败"; } 
-        else if(toggleCount === 2) { btnToggle.innerText = "拒绝无效"; } 
-        else {
-          btnToggle.style.display = "none";
-          document.getElementById('trapText').innerHTML = "520无条件向站长发节日红包 🧧 <b style='color:#ef4444;'>(锁定)</b>";
-        }
-      };
+        btnToggle.onclick = () => {
+          sound.playError();
+          toggleCount++;
+          if (toggleCount === 1) {
+            btnToggle.innerText = "失败";
+          } else if (toggleCount === 2) {
+            btnToggle.innerText = "拒绝无效";
+          } else {
+            btnToggle.style.display = "none";
+            document.getElementById("trapText").innerHTML =
+              "520无条件向站长发节日红包 🧧 <b style='color:#ef4444;'>(锁定)</b>";
+          }
+        };
 
-      document.getElementById('btnStage4').onclick = startStage5;
-    }
+        document.getElementById("btnStage4").onclick = () => {
+          sound.playPop();
+          startStage5();
+        };
+      }
 
-    // ==================== 关卡 5：99% 卡死终极心跳 ====================
-    function startStage5() {
-      const loadingTexts = [
-        '正在植入520防渣隔离霜...',
-        '正在调取你的脱单风水方位...',
-        '正在拼命解密你的心动对象...',
-        '由于您的魅力值过高，系统正在扩容...'
-      ];
+      // ==================== 关卡 5：99% 卡死终极心跳 ====================
+      function startStage5() {
+        const loadingTexts = [
+          "正在植入520防渣隔离霜...",
+          "正在调取你的脱单风水方位...",
+          "正在拼命解密你的心动对象...",
+          "由于您的魅力值过高，系统正在扩容...",
+        ];
 
-      mainCard.innerHTML = `
+        mainCard.innerHTML = `
         <h1>🔄 正在生成 520 终审报告</h1>
         <div class="progress-bound" style="margin: 20px 0;">
           <div id="progressBar" class="progress-bar"></div>
         </div>
-        <p id="progressText" style="color:#db2777; font-weight:bold; font-size:0.85rem;">准备数据结构...</p>
+        <p id="progressText" style="color:var(--color-accent); font-weight:bold; font-size:0.85rem;">准备数据结构...</p>
       `;
 
-      const progressBar = document.getElementById('progressBar');
-      const progressText = document.getElementById('progressText');
-      let width = 0;
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        let width = 0;
 
-      const interval = setInterval(() => {
-        if (width < 85) { width += Math.random() * 6; } 
-        else if (width >= 85 && width < 99) { width += Math.random() * 0.3; }
+        const interval = setInterval(() => {
+          if (width < 85) {
+            width += Math.random() * 6;
+          } else if (width >= 85 && width < 99) {
+            width += Math.random() * 0.3;
+          }
 
-        progressBar.style.width = `${width}%`;
-        
-        if (Math.random() > 0.85) {
-          progressText.innerText = loadingTexts[Math.floor(Math.random() * loadingTexts.length)];
-        }
+          progressBar.style.width = `${width}%`;
 
-        if (width >= 99) {
-          clearInterval(interval);
-          progressBar.style.width = '99%';
-          progressText.innerHTML = `⚠️ <span style="color:#ef4444; font-size:0.8rem;">Fatal Error：由于用户颜值太高，核心机房烧毁了！</span>`;
-          setTimeout(() => { triggerFinalShock(); }, 2200);
-        }
-      }, 90);
-    }
+          if (Math.random() > 0.85) {
+            progressText.innerText = loadingTexts[Math.floor(Math.random() * loadingTexts.length)];
+          }
 
-    // ==================== 终极反转（手机端完美上下排版） ====================
-    function triggerFinalShock() {
-      mainCard.classList.add('final-layout');
-      mainCard.style.border = "3px solid #ec4899";
-      mainCard.style.boxShadow = "0 0 30px rgba(236, 72, 153, 0.4)";
+          if (width >= 99) {
+            clearInterval(interval);
+            progressBar.style.width = "99%";
+            sound.playError();
+            progressText.innerHTML = `⚠️ <span style="color:#ef4444; font-size:0.8rem;">Fatal Error：由于用户颜值太高，核心机房烧毁了！</span>`;
+            setTimeout(() => {
+              triggerFinalShock();
+            }, 2200);
+          }
+        }, 90);
+      }
 
-      mainCard.innerHTML = `
+      // ==================== 终极反转关卡 ====================
+      function triggerFinalShock() {
+        sound.playFanfare();
+        mainCard.classList.add("final-layout");
+        mainCard.style.border = "3px solid #ec4899";
+        mainCard.style.boxShadow = "0 0 30px rgba(236, 72, 153, 0.4)";
+
+        mainCard.innerHTML = `
         <div class="final-left">
           <h1 style="font-size: 2.8rem; margin: 0;">🤡</h1>
-          <h2 style="color:#db2777; font-size:1.4rem; margin: 5px 0 10px 0;">密保验证彻底失败！</h2>
-          <p style="font-size:0.9rem; line-height:1.5; color:#4c0519; margin: 0 0 10px 0;">
+          <h2 style="color:var(--color-accent); font-size:1.4rem; margin: 5px 0 10px 0;">密保验证彻底失败！</h2>
+          <p style="font-size:0.9rem; line-height:1.5; color:var(--color-text-dark); margin: 0 0 10px 0;">
             系统最终判定：<br>
             <span style="color:#e11d48; font-weight:bold;">【嘴硬天花板】 【全自动发红包机】</span><br>
             折腾了这么久，原来小丑竟是你自己！
@@ -586,15 +864,18 @@
           </button>
         </div>
         <div class="final-right">
-          <img src="${MY_PHOTO}" alt="小丑本人" class="final-photo">
-          <p style="text-align:center; font-size:0.75rem; color:#db2777; font-weight:bold; margin-top:5px; margin-bottom:0;">☝️ 嫌疑人高清抓拍档案</p>
+          <img src="${MY_PHOTO}" onerror="this.src='${SVG_AVATAR_FALLBACK}'" alt="小丑本人" class="final-photo">
+          <p style="text-align:center; font-size:0.75rem; color:var(--color-accent); font-weight:bold; margin-top:5px; margin-bottom:0;">☝️ 嫌疑人高清抓拍档案</p>
         </div>
       `;
 
-      document.getElementById('btnEnd').addEventListener('click', () => {
-        alert("🚨 情感中心提示：\n截图和你的大作已秘密保存在你的脑海中！\n好啦不闹了，祝你 520 每一天都开开心心，今天也要保持快乐哈！");
-      });
-    }
-  </script>
-</body>
+        document.getElementById("btnEnd").addEventListener("click", () => {
+          sound.playPop();
+          alert(
+            "🚨 情感中心提示：\n截图和你的大作已秘密保存在你的脑海中！\n好啦不闹了，祝你 520 每一天都开开心心，今天也要保持快乐哈！"
+          );
+        });
+      }
+    </script>
+  </body>
 </html>
